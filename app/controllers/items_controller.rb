@@ -5,6 +5,9 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
+  def show
+  end
+
   def create
     @item = Item.new(create_params)
     if @item.save
