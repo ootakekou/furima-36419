@@ -1,11 +1,11 @@
 class Item < ApplicationRecord
-  extend ActiveHash::Associations::ActiveRecordExtensions 
+  extend ActiveHash::Associations::ActiveRecordExtensions do
   belongs_to :category
-  belongs_to :status_id
+  belongs_to :status
   belongs_to :delivery_fee
   belongs_to :prefecture
   belongs_to :shipping_day
-
+  end
   belongs_to :user
   has_one_attached :image
 
@@ -20,8 +20,5 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :shipping_day_id
     end
-  # with_options foreign_key: true do
-   # validates :user
-   # end
   end
 end
