@@ -27,7 +27,25 @@ RSpec.describe Item, type: :model do
      it 'moneyが空だと登録できない' do
        @item.money = ''
        @item.valid?
-       expect(@item.errors.full_messages).to include("Money can't be blank", "Money is invalid", "Money is out of setting range")
+       expect(@item.errors.full_messages).to include("Money can't be blank")
+     end
+
+     it 'moneyが全角文字では登録できない' do
+       @item.money = '３０００'
+       @item.valid?
+       expect(@item.errors.full_messages).to include("Money is out of setting range")
+     end
+
+     it 'moneyが英数字混合だと登録できない' do
+       @item.money = 'k300'
+       @item.valid?
+       expect(@item.errors.full_messages).to include("Money is out of setting range")
+     end
+
+     it 'moneyが半角英字では登録できない' do
+       @item.money = 'aaaaaa'
+       @item.valid?
+       expect(@item.errors.full_messages).to include("Money is out of setting range")
      end
 
      it 'moneyが300円以下の場合は登録できない' do
