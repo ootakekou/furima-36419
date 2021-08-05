@@ -13,7 +13,7 @@
 
 ### Association
 -has_many :items
--has_many :	purchases
+-has_many :purchases
 
 ## items テーブル
 
@@ -57,7 +57,7 @@
 | city_number        | string     | null: false                    |
 | build_name         | string     |                                |
 | telephone          | string     | null: false                    |
-| sold               | references | null: false, foreign_key: true |
+| purchase           | references | null: false, foreign_key: true |
 
 ### Association
 -belongs_to :purchase
