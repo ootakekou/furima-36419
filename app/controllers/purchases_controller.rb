@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
-
-  def index
-    
+  before_action :authenticate_user!,except: :create 
+  before_action :sold_out_item, only: [:index, :create]
+  def index   
     @item = Item.find(params[:item_id])
     @purchase_delivery = PurchaseDelivery.new
   end
@@ -31,4 +31,12 @@ class PurchasesController < ApplicationController
         currency: 'jpy'                 
       )
   end
+  
+   private
+   def sold_out_item
+    @item = Item.find(params[:item_id])
+   if @item.purchase.present?
+    redirect_to root_path
+   end
+   end
 end
