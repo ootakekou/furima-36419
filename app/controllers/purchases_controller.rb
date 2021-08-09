@@ -1,14 +1,13 @@
 class PurchasesController < ApplicationController
-  before_action :authenticate_user!, except: :create
-  before_action :sold_out_item, only: [:index, :create]
+  before_action :authenticate_user!
+  before_action :sold_out_item
+  before_action :set_purchase
   def index
-    @item = Item.find(params[:item_id])
     @purchase_delivery = PurchaseDelivery.new
     redirect_to root_path if current_user == @item.user
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase_delivery = PurchaseDelivery.new(purchase_params)
     if @purchase_delivery.valid?
       pay_item
@@ -39,5 +38,9 @@ class PurchasesController < ApplicationController
   def sold_out_item
     @item = Item.find(params[:item_id])
     redirect_to root_path if @item.purchase.present?
+  end
+
+  def set_purchase
+    @item = Item.find(params[:item_id])
   end
 end

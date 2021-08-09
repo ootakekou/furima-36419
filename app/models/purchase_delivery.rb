@@ -1,6 +1,6 @@
 class PurchaseDelivery
   include ActiveModel::Model
-  attr_accessor :postal_code, :prefecture_id, :city, :city_number, :build_name, :telephone, :purchase_id, :user_id, :item_id,
+  attr_accessor :postal_code, :prefecture_id, :city, :city_number, :build_name, :telephone, :user_id, :item_id,
                 :token
 
   with_options presence: true do
@@ -10,6 +10,8 @@ class PurchaseDelivery
     validates :city_number
     validates :telephone, format: { with: /\A\d{10,11}\z/ }
     validates :token
+    validates :user_id
+    validates :item_id
   end
   def save
     purchase = Purchase.create(item_id: item_id, user_id: user_id)
