@@ -2,9 +2,9 @@ class PurchasesController < ApplicationController
   before_action :authenticate_user!
   before_action :sold_out_item
   before_action :set_purchase
+  before_action :set_index
   def index
     @purchase_delivery = PurchaseDelivery.new
-    redirect_to root_path if current_user == @item.user
   end
 
   def create
@@ -43,4 +43,7 @@ class PurchasesController < ApplicationController
   def set_purchase
     @item = Item.find(params[:item_id])
   end
+
+  def set_index
+    redirect_to root_path if current_user == @item.user
 end
