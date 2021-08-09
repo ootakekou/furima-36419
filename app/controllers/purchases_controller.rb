@@ -45,4 +45,5 @@ class PurchasesController < ApplicationController
 
   def set_index
     redirect_to root_path if current_user == @item.user
+  end
 end
