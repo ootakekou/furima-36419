@@ -97,6 +97,12 @@ RSpec.describe PurchaseDelivery, type: :model do
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Telephone is invalid")
       end
+
+      it 'postal_codeのハイフンがないと保存できないこと' do
+        @purchase_delivery.postal_code = '1234567'
+        @purchase_delivery.valid?
+        expect(@purchase_delivery.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+      end
     end
   end
 end
