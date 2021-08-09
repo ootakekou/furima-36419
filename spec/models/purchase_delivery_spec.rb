@@ -28,7 +28,7 @@ RSpec.describe PurchaseDelivery, type: :model do
       end
 
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
-        @purchase_delivery.postal_code = '123=4567'
+        @purchase_delivery.postal_code = '1234-567'
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
